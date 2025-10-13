@@ -65,7 +65,6 @@ public class SocialHistoryBookService {
         System.out.println("SocialHistoryBook updated successfully!");
     }
 
-    // Remove method by index
     public static void removeSocialHistoryBook() {
         displayAllSocialHistoryBooks();
         if (socialHistoryBookList.isEmpty())

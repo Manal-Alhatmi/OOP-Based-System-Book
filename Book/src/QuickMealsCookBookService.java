@@ -12,10 +12,10 @@ public class QuickMealsCookBookService {
         int maxPreparationTime = scanner.nextInt();
         scanner.nextLine();
 
-        System.out.print("Enter Meal Type (e.g., Breakfast, Lunch): ");
+        System.out.print("Enter Meal Type: ");
         String mealType = scanner.nextLine();
 
-        System.out.print("Enter Caloric Information (e.g., 500 kcal): ");
+        System.out.print("Enter Caloric Information: ");
         String caloricInformation = scanner.nextLine();
 
         return new QuickMealsCookBook(maxPreparationTime, mealType, caloricInformation);

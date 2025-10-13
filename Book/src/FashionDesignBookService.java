@@ -25,7 +25,6 @@ public class FashionDesignBookService {
         System.out.println("FashionDesignBook added successfully!");
     }
 
-    // Wrapper to add a book
     static void addFashionDesignBook() {
         FashionDesignBook book = addInput();
         save(book);
