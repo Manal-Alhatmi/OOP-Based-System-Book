@@ -3,10 +3,7 @@ public class FashionDesignBook extends DesignBook {
     private String fabricGuide;
     private String illustrationTechnique;
 
-    public FashionDesignBook() {}
-
-    public FashionDesignBook(String title, String author, String garmentType, String fabricGuide, String illustrationTechnique) {
-        super(title, author);
+    public FashionDesignBook(String garmentType, String fabricGuide, String illustrationTechnique) {
         this.garmentType = garmentType;
         this.fabricGuide = fabricGuide;
         this.illustrationTechnique = illustrationTechnique;

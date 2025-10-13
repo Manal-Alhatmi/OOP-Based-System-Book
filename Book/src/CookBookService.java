@@ -1,11 +1,12 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class CookBookService extends Book{
+public class CookBookService {
     static ArrayList<CookBook> cookBookList = new ArrayList<>();
     static Scanner scanner = new Scanner(System.in);
 
-    static void addCookBook() {
+    // Input method for adding a new CookBook
+    public static CookBook addInput() {
         System.out.print("Enter Cuisine Type: ");
         String cuisineType = scanner.nextLine();
 
@@ -17,12 +18,46 @@ public class CookBookService extends Book{
         boolean hasNutritionalInfo = scanner.nextBoolean();
         scanner.nextLine();
 
-        CookBook newCookBook = new CookBook(cuisineType, numberOfRecipes, hasNutritionalInfo);
-        cookBookList.add(newCookBook);
+        return new CookBook(cuisineType, numberOfRecipes, hasNutritionalInfo);
+    }
+
+    // Save method to add CookBook to the list
+    public static void save(CookBook cookBook) {
+        cookBookList.add(cookBook);
         System.out.println("CookBook added successfully!");
     }
 
-    static void editCookBook() {
+    public static void addCookBook() {
+        CookBook newCookBook = addInput();
+        save(newCookBook);
+    }
+
+    public static void editInput(CookBook cb) {
+        System.out.print("Enter new Cuisine Type (leave blank to keep '" + cb.getCuisineType() + "'): ");
+        String cuisineType = scanner.nextLine();
+        if (!cuisineType.isEmpty()) {
+            cb.setCuisineType(cuisineType);
+        }
+
+        System.out.print("Enter new Number of Recipes (current: " + cb.getNumberOfRecipes() + "): ");
+        String numberInput = scanner.nextLine();
+        if (!numberInput.isEmpty()) {
+            try {
+                int newNumber = Integer.parseInt(numberInput);
+                cb.setNumberOfRecipes(newNumber);
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid number input. Keeping previous value");
+            }
+        }
+
+        System.out.print("Change nutritional info? (true/false) (current: " + cb.isHasNutritionalInfo() + "): ");
+        String boolInput = scanner.nextLine();
+        if (!boolInput.isEmpty()) {
+            cb.setHasNutritionalInfo(Boolean.parseBoolean(boolInput));
+        }
+    }
+
+    public static void editCookBook() {
         displayAllCookBooks();
         if (cookBookList.isEmpty()) {
             return;
@@ -38,31 +73,13 @@ public class CookBookService extends Book{
         }
 
         CookBook cb = cookBookList.get(index);
-
-        System.out.print("Enter new Cuisine Type (leave blank to keep '" + cb.getCuisineType() + "'): ");
-        String cuisineType = scanner.nextLine();
-        if (!cuisineType.isEmpty()) {
-            cb.setCuisineType(cuisineType);
-        }
-
-        System.out.print("Enter new Number of Recipes (current: " + cb.getNumberOfRecipes() + "): ");
-        String numberInput = scanner.nextLine();
-        if (!numberInput.isEmpty()) {
-            int newNumber = Integer.parseInt(numberInput);
-            cb.setNumberOfRecipes(newNumber);
-        }
-
-        System.out.print("Change nutritional info? (true/false) (current: " + cb.isHasNutritionalInfo() + "): ");
-        String boolInput = scanner.nextLine();
-        if (!boolInput.isEmpty()) {
-            boolean newBool = Boolean.parseBoolean(boolInput);
-            cb.setHasNutritionalInfo(newBool);
-        }
+        editInput(cb);
 
         System.out.println("CookBook updated successfully!");
     }
 
-    static void removeCookBook() {
+    // Remove method
+    public static void removeCookBook() {
         displayAllCookBooks();
         if (cookBookList.isEmpty()) return;
 
@@ -79,9 +96,9 @@ public class CookBookService extends Book{
         System.out.println("CookBook removed successfully!");
     }
 
-    static void displayAllCookBooks() {
+    public static void displayAllCookBooks() {
         if (cookBookList.isEmpty()) {
-            System.out.println("No CookBooks in the list.");
+            System.out.println("No CookBooks in the list");
         } else {
             System.out.println("\nList of CookBooks:");
             for (int i = 0; i < cookBookList.size(); i++) {

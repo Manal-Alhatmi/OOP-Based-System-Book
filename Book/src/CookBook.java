@@ -8,6 +8,10 @@
         public CookBook(String cuisineType, int numberOfRecipes, boolean hasNutritionalInfo) {
         }
 
+        public CookBook() {
+
+        }
+
 
         public String getCuisineType() {
             return cuisineType;

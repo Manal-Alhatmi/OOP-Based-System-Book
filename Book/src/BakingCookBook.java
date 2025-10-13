@@ -10,6 +10,11 @@ public class BakingCookBook extends CookBook {
         this.yeastType = yeastType;
     }
 
+    public BakingCookBook(String bakingTechnique, String difficultyLevel, String yeastType) {
+        super();
+    }
+
+
     public String getBakingTechnique() {
         return bakingTechnique;
     }

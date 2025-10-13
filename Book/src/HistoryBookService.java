@@ -1,11 +1,12 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class HistoryBookService extends Book{
+public class HistoryBookService {
     static ArrayList<HistoryBook> historyBookList = new ArrayList<>();
     static Scanner scanner = new Scanner(System.in);
 
-    static void addHistoryBook() {
+    // Input method to get new HistoryBook data
+    public static HistoryBook addInput() {
         HistoryBook historyBook = new HistoryBook();
 
         System.out.print("Enter Era: ");
@@ -21,27 +22,22 @@ public class HistoryBookService extends Book{
         scanner.nextLine();
         historyBook.setContainsMaps(containsMaps);
 
+        return historyBook;
+    }
+
+    // Save method to add HistoryBook to the list
+    public static void save(HistoryBook historyBook) {
         historyBookList.add(historyBook);
         System.out.println("HistoryBook added successfully!");
     }
 
-    static void editHistoryBook() {
-        displayAllHistoryBooks();
-        if (historyBookList.isEmpty()) {
-            return;
-        }
+    public static void addHistoryBook() {
+        HistoryBook newBook = addInput();
+        save(newBook);
+    }
 
-        System.out.print("Enter index of HistoryBook to edit: ");
-        int index = scanner.nextInt();
-        scanner.nextLine();
-
-        if (index < 0 || index >= historyBookList.size()) {
-            System.out.println("Invalid index.");
-            return;
-        }
-
-        HistoryBook book = historyBookList.get(index);
-
+    // Input method to edit an existing HistoryBook
+    public static void editInput(HistoryBook book) {
         System.out.print("Enter new Era (leave blank to keep '" + book.getEra() + "'): ");
         String era = scanner.nextLine();
         if (!era.isEmpty()) {
@@ -60,22 +56,40 @@ public class HistoryBookService extends Book{
             boolean newContainsMaps = Boolean.parseBoolean(mapsInput);
             book.setContainsMaps(newContainsMaps);
         }
+    }
 
+    // Edit method to select HistoryBook and edit
+    public static void editHistoryBook() {
+        displayAllHistoryBooks();
+        if (historyBookList.isEmpty())
+            return;
+
+        System.out.print("Enter index of HistoryBook to edit: ");
+        int index = scanner.nextInt();
+        scanner.nextLine();
+
+        if (index < 0 || index >= historyBookList.size()) {
+            System.out.println("Invalid index");
+            return;
+        }
+
+        HistoryBook book = historyBookList.get(index);
+        editInput(book);
         System.out.println("HistoryBook updated successfully!");
     }
 
-    static void removeHistoryBook() {
+    // Remove method
+    public static void removeHistoryBook() {
         displayAllHistoryBooks();
-        if (historyBookList.isEmpty()){
+        if (historyBookList.isEmpty())
             return;
-        }
 
         System.out.print("Enter index of HistoryBook to remove: ");
         int index = scanner.nextInt();
         scanner.nextLine();
 
         if (index < 0 || index >= historyBookList.size()) {
-            System.out.println("Invalid index.");
+            System.out.println("Invalid index");
             return;
         }
 
@@ -83,16 +97,15 @@ public class HistoryBookService extends Book{
         System.out.println("HistoryBook removed successfully!");
     }
 
-    static void displayAllHistoryBooks() {
+    // Display method
+    public static void displayAllHistoryBooks() {
         if (historyBookList.isEmpty()) {
             System.out.println("No HistoryBooks in the list.");
         } else {
             System.out.println("\nList of HistoryBooks:");
             for (int i = 0; i < historyBookList.size(); i++) {
                 HistoryBook book = historyBookList.get(i);
-                System.out.println("[" + i + "] Era: " + book.getEra()
-                        + ", Author: " + book.getAuthor()
-                        + ", Contains Maps: " + book.isContainsMaps());
+                System.out.println("[" + i + "] Era: " + book.getEra() + ", Author: " + book.getAuthor() + ", Contains Maps: " + book.isContainsMaps());
             }
         }
     }

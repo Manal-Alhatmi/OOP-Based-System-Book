@@ -3,10 +3,7 @@ public class GraphicDesignBook extends DesignBook {
     private String colorTheorySection;
     private String softwareTutorialsIncluded;
 
-    public GraphicDesignBook() {}
-
-    public GraphicDesignBook(String title, String author, String typographyFocus, String colorTheorySection, String softwareTutorialsIncluded) {
-        super(title, author);
+    public GraphicDesignBook(String typographyFocus, String colorTheorySection, String softwareTutorialsIncluded) {
         this.typographyFocus = typographyFocus;
         this.colorTheorySection = colorTheorySection;
         this.softwareTutorialsIncluded = softwareTutorialsIncluded;

@@ -3,10 +3,7 @@ public class MilitaryHistoryBook extends HistoryBook {
     private String battleAnalysisSection;
     private String strategicMaps;
 
-    public MilitaryHistoryBook() {}
-
-    public MilitaryHistoryBook(String title, String author, String conflictFocus, String battleAnalysisSection, String strategicMaps) {
-        super(title, author);
+    public MilitaryHistoryBook(String conflictFocus, String battleAnalysisSection, String strategicMaps) {
         this.conflictFocus = conflictFocus;
         this.battleAnalysisSection = battleAnalysisSection;
         this.strategicMaps = strategicMaps;

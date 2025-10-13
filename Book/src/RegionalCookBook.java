@@ -3,13 +3,14 @@ public class RegionalCookBook extends CookBook {
     private String culturalContext;
     private String ingredientSourcingGuide;
 
-    public RegionalCookBook() {}
-
-    public RegionalCookBook(String title, String author, String cuisineRegion, String culturalContext, String ingredientSourcingGuide) {
-        super(title, author);
+    public RegionalCookBook(String cuisineType, int numberOfRecipes, boolean hasNutritionalInfo, String cuisineRegion, String culturalContext, String ingredientSourcingGuide) {
+        super(cuisineType, numberOfRecipes, hasNutritionalInfo);
         this.cuisineRegion = cuisineRegion;
         this.culturalContext = culturalContext;
         this.ingredientSourcingGuide = ingredientSourcingGuide;
+    }
+
+    public RegionalCookBook(String cuisineRegion, String culturalContext, String sourcingGuide) {
     }
 
     public String getCuisineRegion() {

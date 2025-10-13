@@ -6,27 +6,42 @@ public class BaseEntityService {
     static ArrayList<BaseEntity> baseEntitiesList = new ArrayList<>();
     static Scanner scanner = new Scanner(System.in);
 
-    static void addBaseEntity() {
-        BaseEntity newBaseEntities = new BaseEntity();
-        System.out.println("Enter BaseEntity Id: ");
-        Integer id = scanner.nextInt();
-        while ( (id < 0) || checkIfBookIdExists(id)) {
-            System.out.println("Input is not accepted, please enter another ID");
-            id = scanner.nextInt();
-        }
-        newBaseEntities.setId(id);
-        scanner.nextLine();
-        newBaseEntities.setCreatedDate((new Date().toString()));
-        newBaseEntities.setUpdatedDate((new Date().toString()));
-        baseEntitiesList.add(newBaseEntities);
+    public static BaseEntity addInput() {
+        BaseEntity newBaseEntity = new BaseEntity();
 
-        baseEntitiesList.add(newBaseEntities);
-        System.out.println("Base Entity added successfully");
+        System.out.print("Enter BaseEntity Id: ");
+        int id = scanner.nextInt();
+        scanner.nextLine();
+
+        if (id < 0 || checkIfBookIdExists(id)) {
+            System.out.println("Invalid or duplicate ID. Operation cancelled.");
+            return null;
+        }
+
+        newBaseEntity.setId(id);
+        String now = new Date().toString();
+        newBaseEntity.setCreatedDate(now);
+        newBaseEntity.setUpdatedDate(now);
+
+        return newBaseEntity;
     }
 
+    public static void save(BaseEntity baseEntity) {
+        if (baseEntity != null) {
+            baseEntitiesList.add(baseEntity);
+            System.out.println("Base Entity added successfully");
+        } else {
+            System.out.println("Base Entity not added due to invalid input.");
+        }
+    }
+
+    public static void addBaseEntity() {
+        BaseEntity baseEntity = addInput();
+        save(baseEntity);
+    }
 
     public static void editBaseEntity() {
-        System.out.println("Enter BaseEntity Id: ");
+        System.out.print("Enter BaseEntity Id: ");
         int id = scanner.nextInt();
         scanner.nextLine();
 
@@ -42,13 +57,13 @@ public class BaseEntityService {
             return;
         }
 
-        System.out.println("Enter Created Date");
+        System.out.print("Enter Created Date (leave blank to keep '" + baseEntityToEdit.getCreatedDate() + "'): ");
         String createdDate = scanner.nextLine();
         if (!createdDate.isEmpty()) {
             baseEntityToEdit.setCreatedDate(createdDate);
         }
 
-        System.out.println("Enter Updated Date");
+        System.out.print("Enter Updated Date (leave blank to keep '" + baseEntityToEdit.getUpdatedDate() + "'): ");
         String updatedDate = scanner.nextLine();
         if (!updatedDate.isEmpty()) {
             baseEntityToEdit.setUpdatedDate(updatedDate);
@@ -56,9 +71,8 @@ public class BaseEntityService {
         System.out.println("Base Entity updated successfully");
     }
 
-
-        public static void removeBaseEntity() {
-        System.out.println("Enter Base Entity Id to Remove: ");
+    public static void removeBaseEntity() {
+        System.out.print("Enter Base Entity Id to Remove: ");
         int id = scanner.nextInt();
         scanner.nextLine();
 
@@ -77,12 +91,11 @@ public class BaseEntityService {
         }
     }
 
-
-    static void displayAllBaseEntity() {
+    public static void displayAllBaseEntity() {
         if (baseEntitiesList.isEmpty()) {
             System.out.println("No base entity in the list");
         } else {
-            System.out.println("\n List of Base Entity ");
+            System.out.println("\nList of Base Entities:");
             for (BaseEntity baseEntity : baseEntitiesList) {
                 System.out.println(baseEntity);
             }

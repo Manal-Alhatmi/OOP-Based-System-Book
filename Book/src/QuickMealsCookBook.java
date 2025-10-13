@@ -3,13 +3,14 @@ public class QuickMealsCookBook extends CookBook {
     private String mealType;
     private String caloricInformation;
 
-    public QuickMealsCookBook() {}
-
-    public QuickMealsCookBook(String title, String author, int maxPreparationTime, String mealType, String caloricInformation) {
-        super(title, author);
+    public QuickMealsCookBook(String cuisineType, int numberOfRecipes, boolean hasNutritionalInfo, int maxPreparationTime, String mealType, String caloricInformation) {
+        super(cuisineType, numberOfRecipes, hasNutritionalInfo);
         this.maxPreparationTime = maxPreparationTime;
         this.mealType = mealType;
         this.caloricInformation = caloricInformation;
+    }
+
+    public QuickMealsCookBook(int maxPreparationTime, String mealType, String caloricInformation) {
     }
 
     public int getMaxPreparationTime() {

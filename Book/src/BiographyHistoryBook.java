@@ -3,10 +3,7 @@ public class BiographyHistoryBook extends HistoryBook {
     private String historicalPeriod;
     private String primarySourceExcerpts;
 
-    public BiographyHistoryBook() {}
-
-    public BiographyHistoryBook(String title, String author, String subjectPerson, String historicalPeriod, String primarySourceExcerpts) {
-        super(title, author);
+    public BiographyHistoryBook(String subjectPerson, String historicalPeriod, String primarySourceExcerpts) {
         this.subjectPerson = subjectPerson;
         this.historicalPeriod = historicalPeriod;
         this.primarySourceExcerpts = primarySourceExcerpts;

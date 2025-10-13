@@ -3,10 +3,7 @@ public class InteriorDesignBook extends DesignBook {
     private String roomFocus;
     private String materialPalette;
 
-    public InteriorDesignBook() {}
-
-    public InteriorDesignBook(String title, String author, String designStyle, String roomFocus, String materialPalette) {
-        super(title, author);
+    public InteriorDesignBook(String designStyle, String roomFocus, String materialPalette) {
         this.designStyle = designStyle;
         this.roomFocus = roomFocus;
         this.materialPalette = materialPalette;

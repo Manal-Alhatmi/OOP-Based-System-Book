@@ -3,10 +3,7 @@ public class SocialHistoryBook extends HistoryBook {
     private String eraOfStudy;
     private String culturalArtifactsDiscussed;
 
-    public SocialHistoryBook() {}
-
-    public SocialHistoryBook(String title, String author, String focusPopulation, String eraOfStudy, String culturalArtifactsDiscussed) {
-        super(title, author);
+    public SocialHistoryBook(String focusPopulation, String eraOfStudy, String culturalArtifactsDiscussed) {
         this.focusPopulation = focusPopulation;
         this.eraOfStudy = eraOfStudy;
         this.culturalArtifactsDiscussed = culturalArtifactsDiscussed;

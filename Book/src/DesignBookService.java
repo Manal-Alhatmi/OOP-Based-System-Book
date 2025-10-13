@@ -1,11 +1,12 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class DesignBookService extends Book{
+public class DesignBookService {
     static ArrayList<DesignBook> designBookList = new ArrayList<>();
     static Scanner scanner = new Scanner(System.in);
 
-    static void addDesignBook() {
+    // Input method to get data for a new DesignBook
+    public static DesignBook addInput() {
         DesignBook designBook = new DesignBook();
 
         System.out.print("Enter Design Field: ");
@@ -17,25 +18,21 @@ public class DesignBookService extends Book{
         scanner.nextLine();
         designBook.setIncludesTemplates(includesTemplates);
 
+        return designBook;
+    }
+
+    public static void save(DesignBook designBook) {
         designBookList.add(designBook);
         System.out.println("DesignBook added successfully!");
     }
 
-    static void editDesignBook() {
-        displayAllDesignBooks();
-        if (designBookList.isEmpty()) return;
+    public static void addDesignBook() {
+        DesignBook newBook = addInput();
+        save(newBook);
+    }
 
-        System.out.print("Enter index of DesignBook to edit: ");
-        int index = scanner.nextInt();
-        scanner.nextLine();
-
-        if (index < 0 || index >= designBookList.size()) {
-            System.out.println("Invalid index");
-            return;
-        }
-
-        DesignBook book = designBookList.get(index);
-
+    // Input method for editing an existing DesignBook
+    public static void editInput(DesignBook book) {
         System.out.print("Enter new Design Field (leave blank to keep '" + book.getDesignField() + "'): ");
         String field = scanner.nextLine();
         if (!field.isEmpty()) {
@@ -48,11 +45,30 @@ public class DesignBookService extends Book{
             boolean newIncludes = Boolean.parseBoolean(includesInput);
             book.setIncludesTemplates(newIncludes);
         }
+    }
 
+
+    public static void editDesignBook() {
+        displayAllDesignBooks();
+        if (designBookList.isEmpty())
+            return;
+
+        System.out.print("Enter index of DesignBook to edit: ");
+        int index = scanner.nextInt();
+        scanner.nextLine();
+
+        if (index < 0 || index >= designBookList.size()) {
+            System.out.println("Invalid index");
+            return;
+        }
+
+        DesignBook book = designBookList.get(index);
+        editInput(book);
         System.out.println("DesignBook updated successfully!");
     }
 
-    static void removeDesignBook() {
+    // Remove method
+    public static void removeDesignBook() {
         displayAllDesignBooks();
         if (designBookList.isEmpty())
             return;
@@ -67,18 +83,19 @@ public class DesignBookService extends Book{
         }
 
         designBookList.remove(index);
+
         System.out.println("DesignBook removed successfully!");
     }
 
-    static void displayAllDesignBooks() {
+    // Display method
+    public static void displayAllDesignBooks() {
         if (designBookList.isEmpty()) {
             System.out.println("No DesignBooks in the list.");
         } else {
             System.out.println("\nList of DesignBooks:");
             for (int i = 0; i < designBookList.size(); i++) {
                 DesignBook book = designBookList.get(i);
-                System.out.println("[" + i + "] Design Field: " + book.getDesignField() +
-                        ", Includes Templates: " + book.isIncludesTemplates());
+                System.out.println("[" + i + "] Design Field: " + book.getDesignField() + " Includes Templates: " + book.isIncludesTemplates());
             }
         }
     }
